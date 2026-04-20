@@ -1,26 +1,213 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #DCE1EF;
   --foreground: #171717;
+  --text-primary: #09080E;
+  --text-secondary: #7A7A7A;
+  --text-muted-strong: #5C5C5C;
+  --surface-soft: rgba(151, 151, 151, 0.1);
+  --chip-background: rgba(69, 156, 255, 0.15);
+  --chip-foreground: #09080E;
+  --logo-filter: none;
+  --nav-surface: rgba(255, 255, 255, 0.1);
+  --nav-shadow: none;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --font-pathway: var(--font-pathway);
+  --font-arp: var(--font-arp);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #09080E;
+    --foreground: #C7C7C7;
+    --text-primary: #FFFFFF;
+    --text-secondary: #C7C7C7;
+    --text-muted-strong: #FFFFFF;
+    --surface-soft: rgba(151, 151, 151, 0.1);
+    --chip-background: #459CFF;
+    --chip-foreground: #09080E;
+    --logo-filter: brightness(0) invert(1);
+    --nav-surface: rgba(255, 255, 255, 0.16);
+    --nav-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+  }
+}
+
+html {
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:
+    var(--font-pathway),
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+}
+
+.bg-gradient {
+  background-image: url(../assets/images/gradientBg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-x: center;
+}
+
+.liquid-glass {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(255, 255, 255, 0.05) 25%,
+      rgba(255, 255, 255, 0.08) 50%,
+      rgba(255, 255, 255, 0.05) 75%,
+      rgba(255, 255, 255, 0.15) 100%
+    ),
+    radial-gradient(
+      circle at 30% 20%,
+      rgba(255, 255, 255, 0.14) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 70% 80%,
+      rgba(255, 255, 255, 0.125) 0%,
+      transparent 50%
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.02),
+    0 8px 24px rgba(0, 0, 0, 0.02),
+    0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.liquid-glass::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 1;
+
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.25) 35%,
+    rgba(255, 255, 255, 0.4) 40%,
+    rgba(255, 255, 255, 0.2) 45%,
+    transparent 50%
+  );
+
+  transform: translateX(-100%);
+}
+
+.liquid-glass::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.4;
+  z-index: 2;
+
+  background:
+    radial-gradient(
+      ellipse at top left,
+      rgba(255, 255, 255, 0.2) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      ellipse at bottom right,
+      rgba(255, 255, 255, 0.12) 0%,
+      transparent 40%
+    );
+}
+
+.liquid-glass > * {
+  position: relative;
+  z-index: 5;
+}
+
+.theme-logo {
+  filter: var(--logo-filter);
+  transition: filter 200ms ease;
+}
+
+.liquid-glass-light {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.04) 25%,
+      rgba(255, 255, 255, 0.02) 50%,
+      rgba(255, 255, 255, 0.04) 75%,
+      rgba(255, 255, 255, 0.08) 100%
+    ),
+    radial-gradient(
+      circle at 30% 20%,
+      rgba(255, 255, 255, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 70% 80%,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 50%
+    );
+}
+
+.liquid-glass-dark {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.32) 0%,
+      rgba(255, 255, 255, 0.18) 25%,
+      rgba(255, 255, 255, 0.12) 50%,
+      rgba(255, 255, 255, 0.18) 75%,
+      rgba(255, 255, 255, 0.25) 100%
+    ),
+    radial-gradient(
+      circle at 30% 20%,
+      rgba(255, 255, 255, 0.42) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 70% 80%,
+      rgba(255, 255, 255, 0.28) 0%,
+      transparent 50%
+    );
 }
