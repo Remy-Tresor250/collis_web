@@ -12,38 +12,38 @@ const legals = [
 const Footer = () => {
   return (
     <div className="w-full px-[8%]">
-      <div className="w-full bg-[var(--surface-soft)] rounded-t-[20px] px-[10%] py-[40px] flex flex-row items-start justify-between">
-        <div className="w-[50%] flex flex-col gap-[30px]">
-          <div className="flex flex-row gap-[6px] items-center">
+      <div className="w-full bg-[var(--surface-soft)] rounded-t-[20px] lg:px-[10%] px-[5%] py-[40px] flex flex-col md:flex-row items-start justify-between gap-[40px] md:gap-[20px]">
+        <div className="md:w-[50%] w-full flex flex-col gap-[30px]">
+          <Link href={"https://collis.so"} className="flex flex-row gap-[6px] items-center">
             <Image
               src={blackLogo}
               alt="Collis logo"
-              className="theme-logo w-[41px] h-[41px]"
+              className="theme-logo lg:w-[41px] lg:h-[41px] md:w-[30px] md:h-[30px] w-[23px] h-[23px]"
             />
-            <h4 className="text-[var(--text-primary)] font-arp text-[32px]">Collis</h4>
-          </div>
+            <h4 className="text-[var(--text-primary)] font-arp lg:text-[32px] md:text-[25px] text-[18px]">Collis</h4>
+          </Link>
 
-          <p className="text-[var(--text-secondary)] font-regular text-[15px]">
+          <p className="text-[var(--text-secondary)] font-regular lg:text-[15px] text-[12px]">
             Collis is a digital wallet for visitors and tourists to Rwanda,
             enabling instant cashless payments.
           </p>
-          <p className="text-[var(--text-secondary)] font-regular text-[15px]">
+          <p className="text-[var(--text-secondary)] font-regular lg:text-[15px] text-[12px]">
             Users can seamlessly pay anyone via mobile money without needing to
             register for a local SIM card
           </p>
 
-          <p className="text-[var(--text-secondary)] font-semibold text-[14px]">&copy; 2026 Collis. All rights reserved.</p>
+          <p className="text-[var(--text-secondary)] font-semibold lg:text-[14px] text-[12px]">&copy; 2026 Collis. All rights reserved.</p>
         </div>
 
-        <div className="w-[50%] flex flex-row items-start justify-evenly">
+        <div className="md:w-[50%] w-full flex flex-row items-start justify-evenly">
           <div className="flex flex-col gap-[12px] items-start">
-            <h4 className="text-[18px] text-[var(--text-primary)] font-semibold mb-[20px]">
+            <h4 className="lg:text-[18px] text-[15px] text-[var(--text-primary)] font-semibold mb-[20px]">
               Legal
             </h4>
 
             {legals.map((item, index) => (
               <Link href={item.url} key={index}>
-                <p className="text-[var(--text-secondary)] text-[14px] font-medium">
+                <p className="text-[var(--text-secondary)] lg:text-[14px] text-[13px] font-medium">
                   {item.name}
                 </p>
               </Link>
@@ -51,17 +51,17 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-col gap-[12px] items-start">
-            <h4 className="text-[18px] text-[var(--text-primary)] font-semibold mb-[20px]">
+            <h4 className="lg:text-[18px] text-[15px] text-[var(--text-primary)] font-semibold mb-[20px]">
               Links
             </h4>
 
             <Link href={"#"}>
-              <p className="text-[var(--text-secondary)] text-[14px] font-medium">Pricing</p>
+              <p className="text-[var(--text-secondary)] lg:text-[14px] text-[13px] font-medium">Pricing</p>
             </Link>
 
             <Link href={"#"}>
               <div className="flex flex-row items-center gap-[3px]">
-                <p className="text-[var(--text-secondary)] text-[14px] font-medium">
+                <p className="text-[var(--text-secondary)] lg:text-[14px] text-[13px] font-medium">
                   Get app
                 </p>
                 <div className="text-white font-semibold bg-[#459CFF] text-[10px] rounded-full px-[6px] py-[2px]">
