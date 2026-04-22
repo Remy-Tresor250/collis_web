@@ -6,7 +6,7 @@ const legals = [
   { name: "Terms of Service", url: "#" },
   { name: "Privacy Policy", url: "#" },
   { name: "KYC Policy", url: "#" },
-  { name: "Data Processing Arrangement", url: "#" },
+  { name: "Data Processing Agreement", url: "#" },
 ];
 
 const Footer = () => {
