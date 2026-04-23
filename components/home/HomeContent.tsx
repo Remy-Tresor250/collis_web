@@ -13,6 +13,7 @@ const HomeContent = () => {
 
   // Show the vertical bar + "With Collis" block only once sequence reaches index 7
   const showCollisBlock = canPlay(7);
+  const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
   return (
     <main className="w-full flex flex-col overflow-y-scroll gap-[15px]">
@@ -33,9 +34,15 @@ const HomeContent = () => {
         {...sequenceProps(1)}
       >
         Payments Simplified for Rwanda
-        <span className="block text-[var(--text-primary)] dark:bg-gradient-to-b dark:from-[var(--text-primary)] dark:via-[#C7C7C7] dark:to-[#7A7A7A] dark:bg-clip-text dark:text-transparent">
-          Visitors & Tourists
-        </span>
+        {isDark ? (
+          <span className="block bg-gradient-to-b from-[#FFFFFF] to-[#7A7A7A] bg-clip-text text-transparent">
+            Visitors & Tourists
+          </span>
+        ) : (
+          <span className="block text-[var(--text-primary)]">
+            Visitors & Tourists
+          </span>
+        )}
       </AnimatedTextReveal>
 
       <div className="w-full flex flex-col gap-[30px] items-start mt-[40px] px-[10%] md:px-[20%]">

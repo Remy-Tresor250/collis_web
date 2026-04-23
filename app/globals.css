@@ -69,13 +69,6 @@ body {
     color 200ms ease;
 }
 
-.bg-gradient {
-  background-image: url(../assets/images/gradientBg.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position-x: center;
-}
-
 .liquid-glass {
   position: relative;
   overflow: hidden;
