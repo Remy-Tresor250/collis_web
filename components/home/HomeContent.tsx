@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import AnimatedTextReveal from "../AnimatedTextReveal";
 import GradientSection from "../GradientSection";
 import { useRevealSequence } from "../useRevealSequence";
@@ -13,7 +14,21 @@ const HomeContent = () => {
 
   // Show the vertical bar + "With Collis" block only once sequence reaches index 7
   const showCollisBlock = canPlay(7);
-  const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const syncTheme = () => {
+      setIsDark(mediaQuery.matches);
+    };
+
+    syncTheme();
+    mediaQuery.addEventListener("change", syncTheme);
+
+    return () => {
+      mediaQuery.removeEventListener("change", syncTheme);
+    };
+  }, []);
 
   return (
     <main className="w-full flex flex-col overflow-y-scroll gap-[15px]">
@@ -217,7 +232,7 @@ const HomeContent = () => {
         </AnimatedTextReveal>
       </div>
 
-      <GradientSection />
+      <GradientSection title="Arrive & Start Paying" />
     </main>
   );
 };

@@ -52,7 +52,7 @@ const PricingContent = () => {
         </p>
       </div>
 
-      <GradientSection />
+      <GradientSection title="Try it for Free" />
     </main>
   );
 };

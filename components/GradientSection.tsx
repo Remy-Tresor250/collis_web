@@ -35,7 +35,7 @@ const detectPlatform = (): MobilePlatform => {
   return "other";
 };
 
-const GradientSection = () => {
+const GradientSection = ({title}: {title: string}) => {
   const [platformState, setPlatformState] = useState(() => ({
     platform: "other" as MobilePlatform,
     downloadEntryUrl: getDownloadEntryUrl(FALLBACK_SITE_URL),
@@ -114,8 +114,8 @@ const GradientSection = () => {
       <div className="px-[18px] py-[12px] rounded-full liquid-glass z-20">
         <p className="text-white text-[14px] font-semibold">Beta 1.0.0</p>
       </div>
-      <h2 className="font-bold text-[25px] md:text-[40px] lg:text-[68px] bg-gradient-to-b from-[#fff] via-[#fff] to-[#4E4E4E] bg-clip-text dark:text-transparent z-20">
-        {isMobileStoreCta ? "Download Collis" : "Scan to Download"}
+      <h2 className="font-bold text-[25px] md:text-[40px] lg:text-[68px] bg-gradient-to-b from-[#fff] via-[#fff] to-[#4E4E4E] bg-clip-text text-transparent z-20">
+        {isMobileStoreCta ? title : "Scan to Download"}
       </h2>
 
       {isMobileStoreCta ? (
