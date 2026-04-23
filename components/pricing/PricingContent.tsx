@@ -34,25 +34,25 @@ const PricingContent = () => {
           className="text-center text-[var(--text-secondary)] lg:text-[18px] md:text-[14px] text-[12px]"
         >
           We charge a flat fee of only 350 RWF{" "}
-          <span {...sequenceProps(3)} className="text-[var(--text-primary)]">
+          <span {...sequenceProps(3)} className="text-[var(--text-primary)] font-semibold">
             ($0.25)
           </span>{" "}
           per transaction, regardless{" "}
           <span className="md:block inline">
             of the amount. Withdrawals incur a flat fee of{" "}
-            <span className="text-[var(--text-primary)]">$2</span>, regardless
+            <span className="text-[var(--text-primary)] font-semibold">$2</span>, regardless
             of the{" "}
           </span>
           <span className="md:block inline">
             amount being withdrawn. Wallet top-ups incur a
-            <span className="text-[var(--text-primary)]"> 3%</span> processing
+            <span className="text-[var(--text-primary)] font-semibold"> 3%</span> processing
             fee
           </span>{" "}
           charged by our payment processor.
         </p>
       </div>
 
-      <GradientSection title="Try it for Free" />
+      <GradientSection />
     </main>
   );
 };

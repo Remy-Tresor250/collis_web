@@ -131,7 +131,7 @@ const Navbar = () => {
       {/* ── Mobile navbar (< md) ── */}
       <div className="md:hidden w-full">
         <motion.div
-          animate={{ borderRadius: mobileOpen ? "20px" : "9999px" }}
+          animate={{ borderRadius: 20 }}
           transition={{ type: "spring", stiffness: 340, damping: 34 }}
           className={`w-full overflow-hidden transition-[background,box-shadow,backdrop-filter] duration-100 ease-out ${
             isScrolled || mobileOpen

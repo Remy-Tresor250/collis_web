@@ -210,7 +210,7 @@ const HomeContent = () => {
         </AnimatedTextReveal>
       </div>
 
-      <GradientSection title="Arrive & Start Paying." />
+      <GradientSection />
     </main>
   );
 };

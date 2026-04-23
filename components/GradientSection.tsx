@@ -1,15 +1,71 @@
 "use client";
+
 import type { ComponentType } from "react";
+import { useEffect, useState } from "react";
 import { ShaderGradient, ShaderGradientCanvas } from "@shadergradient/react";
-import { FaApple } from "react-icons/fa";
+import QRCode from "react-qr-code";
+import { FaApple, FaGooglePlay } from "react-icons/fa";
+import {
+  ANDROID_PLAY_STORE_URL,
+  FALLBACK_SITE_URL,
+  getDownloadEntryUrl,
+  IOS_APP_STORE_URL,
+  type MobilePlatform,
+} from "@/lib/download";
+
 const UnsafeShaderGradient = ShaderGradient as ComponentType<
   Record<string, unknown>
 >;
-const GradientSection = ({ title }: { title: string }) => {
+
+const detectPlatform = (): MobilePlatform => {
+  if (typeof navigator === "undefined") {
+    return "other";
+  }
+
+  const normalizedAgent = navigator.userAgent.toLowerCase();
+
+  if (/iphone|ipad|ipod/.test(normalizedAgent)) {
+    return "ios";
+  }
+
+  if (/android/.test(normalizedAgent)) {
+    return "android";
+  }
+
+  return "other";
+};
+
+const GradientSection = () => {
+  const [platformState, setPlatformState] = useState(() => ({
+    platform: "other" as MobilePlatform,
+    downloadEntryUrl: getDownloadEntryUrl(FALLBACK_SITE_URL),
+  }));
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      setPlatformState({
+        platform: detectPlatform(),
+        downloadEntryUrl: getDownloadEntryUrl(window.location.origin),
+      });
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  const { platform, downloadEntryUrl } = platformState;
+  const isMobileStoreCta = platform === "ios" || platform === "android";
+  const mobileLabel =
+    platform === "android" ? "Download on Android" : "Download on iOS";
+  const mobileHref =
+    platform === "android" ? ANDROID_PLAY_STORE_URL : IOS_APP_STORE_URL;
+  const MobileIcon = platform === "android" ? FaGooglePlay : FaApple;
+
   return (
     <section
       id="get-app"
-      className="w-full my-[30px] lg:h-[690px] md:h-[550px] h-[400px] relative isolate overflow-hidden flex flex-col items-center justify-center gap-[55px] scroll-mt-[100px]"
+      className="w-full my-[30px] lg:h-[690px] md:h-[550px] min-h-[420px] relative isolate overflow-hidden flex flex-col items-center justify-center gap-[28px] md:gap-[40px] px-[24px] py-[36px] scroll-mt-[100px]"
     >
       <div className="absolute pointer-events-none inset-0 z-1 transform-gpu will-change-transform bg-[#09080E]">
         <ShaderGradientCanvas>
@@ -59,19 +115,34 @@ const GradientSection = ({ title }: { title: string }) => {
         <p className="text-white text-[14px] font-semibold">Beta 1.0.0</p>
       </div>
       <h2 className="font-bold text-[25px] md:text-[40px] lg:text-[68px] bg-gradient-to-b from-[#fff] via-[#fff] to-[#4E4E4E] bg-clip-text dark:text-transparent z-20">
-        {title}
+        {isMobileStoreCta ? "Download Collis" : "Scan to Download"}
       </h2>
-      <button className="p-[3.5px] bg-[#FFFFFF4D] rounded-full z-20">
-        <div className="md:px-[22px] px-[18px] md:py-[14px] py-[12px] rounded-full flex flex-row items-center gap-[8px] bg-linear-to-b from-[#FFFFFF] to-[#999999]">
-          <FaApple
-            className="lg:size-[35px] md:size-[28px] size-[22px]"
-            color="black"
+
+      {isMobileStoreCta ? (
+        <a
+          href={mobileHref}
+          className="p-[3.5px] bg-[#FFFFFF4D] rounded-full z-20"
+        >
+          <div className="md:px-[22px] px-[18px] md:py-[14px] py-[12px] rounded-full flex flex-row items-center gap-[8px] bg-linear-to-b from-[#FFFFFF] to-[#999999]">
+            <MobileIcon
+              className="lg:size-[35px] md:size-[28px] size-[22px]"
+              color="black"
+            />
+            <p className="text-black lg:text-[18px] md:text-[15px] text-[12px] font-semibold">
+              {mobileLabel}
+            </p>
+          </div>
+        </a>
+      ) : (
+        <div className="z-20 flex flex-col items-center bg-[#FFFFFF1A] p-[10px]">
+          <QRCode
+            value={downloadEntryUrl}
+            size={176}
+            bgColor="#FFFFFF1A"
+            fgColor="#FFFFFF"
           />
-          <p className="text-black lg:text-[18px] md:text-[15px] text-[12px] font-semibold">
-            Download for ios
-          </p>
         </div>
-      </button>
+      )}
     </section>
   );
 };
